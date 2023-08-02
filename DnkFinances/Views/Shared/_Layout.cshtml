@@ -4,34 +4,134 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - DnkFinances</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DnkFinances.styles.css" asp-append-version="true" />
+    @* bootstrap icons *@
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">DnkFinances</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><span class="navbar-toggler-icon"></span></button>
+
+                <a class="navbar-brand me-auto ms-2 fw-bold text-uppercase" asp-area="" asp-controller="Home" asp-action="Index">DnkFinances</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                
+                     <form class="d-flex ms-auto nav-search-form">
+                        <div class="input-group my-3 my-lg-0">
+
+                            <input class="form-control " type="search" placeholder="Search">
+                            <button class="btn btn-success my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
+                        </div>
+                    </form>
+
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                   <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-fill"></i> 
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                    </li>
                     </ul>
                 </div>
             </div>
         </nav>
+
+        <div class="offcanvas offcanvas-start nav-sidebar bg-primary" data-bs-theme="dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-body p-0">
+                <nav class="navbar-primary">
+                    <ul class="navbar-nav ">
+                        <li>
+                            <div class="text-muted small fw-bold text-uppercase px-3">Main</div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light px-3" asp-area="" asp-controller="Home" asp-action="Index">
+                                <span class="me-2"><i class="bi bi-house-door-fill"></i></span>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li><hr class="divider"></li>
+
+                        <li>
+                            <div class="text-muted small fw-bold text-uppercase px-3">Interface</div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-light px-3"asp-area="" asp-controller="Account" asp-action="Index" >
+                                <span class="me-2"><i class="bi bi-piggy-bank-fill"></i></span>
+                                <span>Contas</span>
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link sidebar-link-drop text-light px-3" 
+                             data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                <span class="me-2"><i class="bi bi-cash-coin"></i></span>
+                                <span>Transações</span>
+                                <span class="sidebar-link-drop-icon ms-auto"><i class="bi bi-chevron-down"></i></span>
+                            </a>
+                            <div class="collapse" id="collapseExample">
+                                <div>
+                                    <ul class="navbar-nav ps-3">
+                                        <li class="nav-item">
+                                           <a class="nav-link text-light px-3" asp-area="" asp-controller="Transaction" asp-action="Income"
+                                            >
+                                                <span class="me-2"><i class="bi bi-caret-left-fill"></i></span>
+                                                <span>Entradas</span>                                                                                          
+                                            </a>
+                                            <a class="nav-link text-light px-3" asp-area="" asp-controller="Transaction" asp-action="Expense"
+                                            >
+                                                <span class="me-2"><i class="bi bi-caret-right-fill"></i></span>
+                                                <span>Saídas</span>                              
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li> 
+
+                        <li class="nav-item">
+                            <a class="nav-link text-light px-3" asp-area="" asp-controller="Category" asp-action="Index">
+                                <span class="me-2"><i class="bi bi-bookmarks-fill"></i></span>
+                                <span>Categorias</span>
+                            </a>
+                        </li>
+
+                        <li><hr class="divider"></li>
+
+                        <li>
+                            <div class="text-muted small fw-bold text-uppercase px-3">32m</div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-light px-3" asp-area="" asp-controller="Home" asp-action="Index">
+                                <span class="me-2"><i class="bi bi-bar-chart-line-fill"></i></span>
+                                <span>Estatísticas</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </nav>
+
+
+            </div>
+        </div>
+
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div class="container main-content">
+        <main role="main" >
             @RenderBody()
         </main>
     </div>

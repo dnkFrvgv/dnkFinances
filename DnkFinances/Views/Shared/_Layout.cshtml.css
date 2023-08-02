@@ -46,3 +46,41 @@ button.accept-policy {
   white-space: nowrap;
   line-height: 60px;
 }
+
+.nav-sidebar{
+  width: var(--nav-sidebar-offset-width);
+}
+
+.sidebar-link-drop{
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-link-drop-icon{
+  display: inline-flex;
+  transition: all ease .5s;
+}
+
+.sidebar-link-drop[aria-expanded="true"] .sidebar-link-drop-icon{
+  transform: rotate(180deg);
+}
+
+
+@media (min-width: 992px){
+  body{
+    overflow: auto !important;
+  }
+  .main-content{
+    margin-left: var(--nav-sidebar-offset-width);
+  }
+
+  .offcanvas-backdrop::before{
+    display: none;
+  }
+  .nav-sidebar{  
+    transform: none;
+    visibility: visible !important;
+    top: var(--custom-nav-height);
+    height: calc(100% - var(--custom-nav-height));
+  }
+}
