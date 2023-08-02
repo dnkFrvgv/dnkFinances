@@ -20,3 +20,8 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+:root{
+  --custom-nav-height: 72px;
+  --nav-sidebar-offset-width: 270px;
+}
