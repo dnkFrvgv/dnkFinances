@@ -1,0 +1,216 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+
+<main class="mt-5">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 fw-bold fs-3">Dashboard</div>
+    </div>
+
+    @* START CARD *@
+    <div class="row mt-2">
+      <div class="col-md-3 mb-3">
+        
+        <div class="card text-white bg-success h-100">
+          @* <div class="card-header">Header</div> *@
+          <div class="card-body">
+            <h4 class="card-title">R$ 2,000</h4>
+            <p class="card-subtitle">Balanço Total</p>
+            @* <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> *@
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-3">
+        
+        <div class="card text-white bg-success h-100">
+          @* <div class="card-header">Header</div> *@
+          <div class="card-body">
+            <h4 class="card-title">R$ 150</h4>
+            <p class="card-subtitle">Total Entrada</p>
+            @* <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> *@
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-3">
+        
+        <div class="card text-white bg-success h-100">
+          @* <div class="card-header">Header</div> *@
+          <div class="card-body">
+            <h4 class="card-title">R$ 800</h4>
+            <p class="card-subtitle">Total saída</p>
+            @* <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> *@
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-3">
+        <div class="card text-white bg-success h-100" >
+          @* <div class="card-header">Header</div> *@
+          <div class="card-body">
+            <h4 class="card-title">R$ 500</h4>
+            <p class="card-subtitle">Outros</p>
+            @* <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> *@
+          </div>
+        </div>
+      </div>
+    </div>
+    @* END CARD *@
+
+    @* CHART *@
+    <div class="row mt-2">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            Valor total das transações dos ultimos 5 mêses
+          </div>
+
+          <div class="card-body">
+            <canvas id="income-expense-current-year-chart" width="400" height="200 "></canvas>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            Categorias mais gasta no mês Atual
+          </div>
+
+          <div class="card-body">
+            <canvas id="categories-current-month" width="200" height="200 "></canvas>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    @* END CHART *@
+
+    @* TABLE *@
+    <div class="row mt-2">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            Historico de Transações
+          </div>
+
+          <div class="card-body">
+            <div class="table-reponsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr class="table-primary">
+                    <th scope="col">Data</th>
+                    <th scope="col">Valor</th>
+                    <th scope="col">Título</th>
+                    <th scope="col">Conta</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Descrição</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    @* END TABLE *@
+  </div> 
+</main>
+
+
+@* scripts *@
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.3/chart.min.js" integrity="sha512-fMPPLjF/Xr7Ga0679WgtqoSyfUoQgdt8IIxJymStR5zV3Fyb6B3u/8DcaZ6R6sXexk5Z64bCgo2TYyn760EdcQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+  @* INCOME VS EXPENSES *@
+  const incomeExpenseCtx = document.getElementById('income-expense-current-year-chart');
+
+  new Chart(incomeExpenseCtx, {
+    type: 'bar',
+    data: {
+      labels: ['Abril', 'Maio', 'Junho', 'Julho', 'Agosto'],
+      datasets: [{
+        label: 'Total Entrada (R$)',
+        data: [500, 215, 300, 590, 930],
+        borderWidth: 1
+      },
+      {
+        label: 'Total saída (R$)',
+        data: [220, 100, 120, 990, 920],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  const categoriesCtx = document.getElementById('categories-current-month');
+
+  new Chart(categoriesCtx, {
+    type: 'doughnut',
+    data: {
+      labels: [
+        'Compras',
+        'Alimentação',
+        'Trabalho',
+        'Outros',
+      ],
+      datasets: [{
+        label: 'Valor total gasto (R$)',
+        data: [300, 350, 1000, 200],
+        backgroundColor: [
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
+          'rgb(255, 205, 86)'
+        ],
+        hoverOffset: 4
+      }]
+    },
+    options: {
+      plugins: {
+        title: {
+          display: true,
+          text: 'Total (R$): 1,650',
+          position: 'bottom'
+        }
+      }
+    }
+  });
+
+  
+
+
+  @* CATEGORIES OF TRANSACTIONS *@
+</script>
