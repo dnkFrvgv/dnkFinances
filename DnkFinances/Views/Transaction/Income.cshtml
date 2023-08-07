@@ -1,10 +1,60 @@
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@using X.PagedList.Mvc.Common;  
 
+@model X.PagedList.PagedList<DnkFinances.Models.TransactionCategory>
+    
 @{
-    ViewData["Title"] = "Income";
+    ViewData["Title"] = "Entrada";
 }
+
 
 <h1>@ViewData["Title"]</h1>
 
-<div>
-    entradas
-</div>
+<table id="example" class="table table-striped" style="width:90%">
+    <thead>
+        <tr>
+            <th>Data</th>
+            <th>Título</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Status</th>
+            <th>Conta</th>
+        </tr>
+    </thead>
+
+    
+    <tbody>
+        @* @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="6">Nenhuma transação encontrada.</td>
+            </tr>
+        }
+        else{ *@
+
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.Title</td>
+                <td>@category.Type</td>
+                
+            </tr>
+        }
+    </tbody>
+    @* <tfoot>
+        <tr>
+            <th>Data</th>
+            <th>Título</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Status</th>
+            <th>Conta</th>
+        </tr>
+    </tfoot> *@
+
+
+</table>
+
+@Html.PagedListPager(Model, page => Url.Action("Income", "Transaction",new { page }))
+
