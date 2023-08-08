@@ -1,84 +1,89 @@
-@using X.PagedList.Mvc.Core;
-@using X.PagedList;
-@using X.PagedList.Mvc.Common;  
-
+@model IEnumerable<DnkFinances.Models.TransactionCategory>
 @{
     ViewData["Title"] = "Categorias";
 }
 
-@model X.PagedList.PagedList<DnkFinances.Models.TransactionCategory>
+ 
+
+<section class="mt-5">
+  <div class="container-fluid">
+    <div class="row d-flex justify-content-between">
+      <div class="col-md-4   fw-bold fs-3">@ViewData["Title"]</div>
+      <div class="col-md-4">
+
+      <a class="btn btn-success" asp-area="" asp-controller="Category" asp-action="CreateIncome">
+        <i class="bi bi-plus-circle-fill"></i>
+        Criar income category
+      </a>
+      <a class="btn btn-success" asp-area="" asp-controller="Category" asp-action="CreateExpense">
+        <i class="bi bi-plus-circle-fill"></i>
+        Criar expense category
+      </a>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="table-reponsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr class="table-primary">
+                    <th scope="col"> @Html.DisplayNameFor(model => model.Title)</th>
+                    <th scope="col"> @Html.DisplayNameFor(model => model.Type)</th>
+                    @* <th scope="col">Tipo</th> *@
+                    <th scope="col">Ações</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  @if (Model.Count() == 0)
+                  {
+                    <tr>
+                        <td colspan="4">Nenhuma conta registrada.</td>
+                    </tr>
+                  } 
+
+                  @foreach (var item in Model) {
+                    <tr>
+                        <td class="text-uppercase">
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                           @Html.DisplayFor(modelItem => @item.Type)
+                        </td>
+
+                        <td colspan="2">
+                            <a title="Editar"
+                              asp-controller="Account" 
+                              asp-action="Edit" 
+                              asp-route-id="@item.Id"
+                            ><i class="bi bi-pencil-fill"></i></a>
+
+                            <a class="mx-2" title="Detalhes" 
+                              asp-controller="Account" 
+                              asp-action="Details" 
+                              asp-route-id="@item.Id"
+                            ><i class="bi bi-archive-fill ml-2"></i></a>
+                            <a title="Deletar"
+                              asp-controller="Account" 
+                              asp-action="Delete" 
+                              asp-route-id="@item.Id"
+                            ><i class="bi bi-trash3-fill"></i></a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
     
-
-<h1>@ViewData["Title"]</h1>
-
-<div>Suas Categorias</div>
-
-<table id="example" class="table table-striped" style="width:95%">
-    <thead>
-        <tr>
-            <th>Categoria</th>
-            <th>Tipo</th>
-            <th>Editar</th>
-            <th>Deletar</th>
-        </tr>
-    </thead>
-
-    
-    <tbody>
-        @* @if (Model.Count() == 0)
-        {
-            <tr>
-                <td colspan="6">Nenhuma transação encontrada.</td>
-            </tr>Categoria 	Tipo
-Salário 	INCOME
-Pet 	
-        }
-        else{ *@
-
-        @foreach (var category in Model)
-        {
-            <tr>
-                <td>@category.Title</td>
-                <td>@category.Type</td>
-                <td>ed</td>
-                <td>del</td>
-
-                
-            </tr>
-        }
-    </tbody>
-    @* <tfoot>
-        <tr>
-            <th>Data</th>
-            <th>Título</th>
-            <th>Descrição</th>
-            <th>Valor</th>
-            <th>Status</th>
-            <th>Conta</th>
-        </tr>
-    </tfoot> *@
-
-
-</table>
-<div>
-  <ul class="pagination"  data-bs-theme="dark">
-    <li class="page-item  ">
-      <a class="page-link  " href="#">&laquo;</a>
-    </li>
-    <li class="page-item ">
-      <a class="page-link" href="#">1</a>
-    </li>
-    <li class="page-item ">
-      <a class="page-link " href="#">2</a>
-    </li>
-    <li class="page-item active">
-      <a class="page-link" href="#">3</a>
-    </li>
-    <li class="page-item">
-      <a class="page-link " href="#">&raquo;</a>
-    </li>
-  </ul>
-</div>
-
-@Html.PagedListPager(Model, page => Url.Action("Index", "Category",new { page }))
-
+</section>

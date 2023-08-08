@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using DnkFinances.Enums;
 using DnkFinances.Interfaces;
 
@@ -6,7 +7,9 @@ namespace DnkFinances.Models
   public class Transaction
   {
     public int Id { get; set; }
+    [Required]
     public TransactionType Type { get; set; }
+    [Required]
     public int AccountId { get; set; }
     public Account Account { get; set; }
     public int CategoryId { get; set; }
